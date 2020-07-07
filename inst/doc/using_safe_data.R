@@ -115,14 +115,14 @@ beetle_morph <- load_safe_data(1400562, 'MorphFunctTraits')
 beetle_morph <- add_taxa(beetle_morph)
 str(beetle_morph)
 
+## ----get_taxon_coverage-------------------------------------------------------
+all_taxa <- get_taxon_coverage()
+str(all_taxa)
+
 ## ----get_phylo----------------------------------------------------------------
 library(ape)
 beetle_phylo <- get_phylogeny(1400562)
 plot(beetle_phylo, show.node.label=TRUE, font=1, no.margin=TRUE)
-
-## ----get_taxon_coverage-------------------------------------------------------
-all_taxa <- get_taxon_coverage()
-str(all_taxa)
 
 ## ----load_gazetteer-----------------------------------------------------------
 gazetteer <- load_gazetteer()
@@ -142,4 +142,14 @@ beetle_env <- load_safe_data(1400562, 'EnvironVariables')
 beetle_env <- add_locations(beetle_env)
 print(beetle_env)
 plot(beetle_env['Cover'], key.pos=4, breaks=seq(0,100, by=5))
+
+## ----insert_dataset-----------------------------------------------------------
+files <- system.file('safedata_example_dir', 'template_ClareWfunctiondata.xlsx', 
+                     package='safedata')
+insert_dataset(1237719, files)
+dat <- load_safe_data(1237719, 'Data')
+str(dat)
+
+## ----unset, echo=FALSE--------------------------------------------------------
+unset_example_safe_dir()
 
