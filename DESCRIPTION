@@ -1,8 +1,8 @@
 Package: safedata
 Type: Package
 Title: Interface to Data from the SAFE Project
-Version: 1.0.5
-Date: 2020-07-07
+Version: 1.0.7
+Date: 2020-07-09
 Authors@R: c(
     person('Andy', 'Aldersley', email='a.aldersley@imperial.ac.uk', role=c('aut')),
     person('David', 'Orme', email='d.orme@imperial.ac.uk', role=c('aut','cre'),
@@ -22,9 +22,9 @@ BugReports: https://github.com/ImperialCollegeLondon/safedata/issues
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-07-07 12:55:34 UTC; dorme
+Packaged: 2020-08-03 10:38:20 UTC; dorme
 Author: Andy Aldersley [aut],
   David Orme [aut, cre] (<https://orcid.org/0000-0002-7005-1394>)
 Maintainer: David Orme <d.orme@imperial.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-07-07 15:00:02 UTC
+Date/Publication: 2020-08-03 14:00:02 UTC

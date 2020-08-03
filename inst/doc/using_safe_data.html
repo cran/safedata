@@ -331,31 +331,34 @@ containing validated record ids and access information and so you can use the no
 <pre><code>## Search returned 19 records
 </code></pre>
 
-<pre><code>## Warning in validate_record_ids(content$entries$zenodo_record_id):
-## Unknown record ids in record_set:
-## 3897377,3888375,3698115,3897394,3614876,3402746,3929632,3857210
-</code></pre>
-
 <pre><code class="r">print(soil_datasets)
 </code></pre>
 
-<pre><code>## Set includes 8 concept ids and 11 record ids: 
-##  - 8 open and most recent (*)
-##  - 3 open and outdated (o)
-##  - 0 under embargo or restricted (x)
+<pre><code>## Set includes 14 concept ids and 19 record ids: 
+##  - 10 open and most recent (*)
+##  - 5 open and outdated (o)
+##  - 4 under embargo or restricted (x)
 ## 
 ##    concept  record available
-## 1  3247591 3247592         *
-## 2  3251886 3258079         *
-## 3  ------- 3251887         o
-## 4  3251899 3258117         *
-## 5  ------- 3251900         o
-## 6  3251901 3258082         *
-## 7  ------- 3251902         o
-## 8  3265745 3265746         *
-## 9  3266770 3266771         *
-## 10 3266821 3266822         *
-## 11 3354067 3354068         *
+## 1  1198564 3857210         *
+## 2  3247591 3247592         *
+## 3  3251886 3258079         *
+## 4  ------- 3251887         o
+## 5  3251899 3258117         *
+## 6  ------- 3251900         o
+## 7  3251901 3897394         *
+## 8  ------- 3614876         o
+## 9  ------- 3258082         o
+## 10 ------- 3251902         o
+## 11 3265745 3265746         *
+## 12 3266770 3266771         x
+## 13 3266821 3266822         *
+## 14 3354067 3354068         *
+## 15 3402745 3402746         x
+## 16 3698114 3698115         x
+## 17 3888374 3888375         *
+## 18 3897376 3897377         x
+## 19 3929631 3929632         *
 </code></pre>
 
 <h3>Taxon search details</h3>
@@ -370,23 +373,23 @@ function searches that index to identify all the datasets that contain a particu
 
 <pre><code class="r">print(ants &lt;- search_taxa(&#39;Formicidae&#39;))
 ## Search returned 11 records
-## Warning in validate_record_ids(content$entries$zenodo_record_id): Unknown record
-## ids in record_set: 3876227,3901735
-## Set includes 9 concept ids and 9 record ids: 
-##  - 9 open and most recent (*)
-##  - 0 open and outdated (o)
-##  - 0 under embargo or restricted (x)
+## Set includes 10 concept ids and 11 record ids: 
+##  - 8 open and most recent (*)
+##  - 1 open and outdated (o)
+##  - 2 under embargo or restricted (x)
 ## 
-##   concept  record available
-## 1 1198301 1198302         *
-## 2 1198471 1237732         *
-## 3 1198838 1198839         *
-## 4 1237729 1237730         *
-## 5 1400561 1400562         *
-## 6 1995247 1995439         *
-## 7 3247484 3247485         *
-## 8 3265745 3265746         *
-## 9 3354067 3354068         *
+##    concept  record available
+## 1  1198301 1198302         *
+## 2  1198471 1237732         *
+## 3  1198838 1198839         *
+## 4  1237729 1237730         x
+## 5  1400561 1400562         *
+## 6  1995247 1995439         *
+## 7  2537072 3901735         x
+## 8  3247484 3876227         *
+## 9  ------- 3247485         o
+## 10 3265745 3265746         *
+## 11 3354067 3354068         *
 </code></pre>
 
 <p>The taxonomic index is built around the GBIF backbone taxonomic database and include the following
@@ -395,8 +398,6 @@ also possible to search by <a href="https://www.gbif.org/species/4342">GBIF ID</
 
 <pre><code class="r">ants &lt;- search_taxa(gbif_id=4342)
 ## Search returned 11 records
-## Warning in validate_record_ids(content$entries$zenodo_record_id): Unknown record
-## ids in record_set: 3876227,3901735
 </code></pre>
 
 <h3>Spatial search details</h3>
@@ -410,15 +411,10 @@ and provide location data if possible. </p>
 
 <pre><code class="r"># Datasets that include sampling within experimental block A
 within_a &lt;- search_spatial(location=&#39;BL_A&#39;)
-## Search returned 30 records
-## Warning in validate_record_ids(content$entries$zenodo_record_id): Unknown record
-## ids in record_set: 3876227,3490675,3832076,3476542
+## Search returned 32 records
 # Datasets that sampled within 2 km of the Maliau Basin Field Study Centre
 near_maliau &lt;- search_spatial(wkt=&#39;POINT(116.97394 4.73481)&#39;, distance=2000)
-## Search returned 56 records
-## Warning in validate_record_ids(content$entries$zenodo_record_id):
-## Unknown record ids in record_set:
-## 3876227,3490564,3402748,3490613,3492009,3901735,3908118,3780391,3857210,3908128
+## Search returned 58 records
 </code></pre>
 
 <p>Note that WKT coordinates should be supplied as WGS84 longitude and latitude - typically the output
@@ -666,8 +662,8 @@ str(beetle_abund)
 ## Concept: 1400561; Record 1400562; Worksheet: Ant-Psel
 ## &#39;data.frame&#39;:    20 obs. of  3 variables:
 ##  $ Site                : chr  &quot;SAFE_E&quot; &quot;SAFE_D&quot; &quot;SAFE_F&quot; &quot;SAFE_C&quot; ...
-##  $ ant species richness: num  31 31 27 29 31 21 31 25 32 26 ...
-##  $ ant abundance       : num  561 713 392 481 1036 ...
+##  $ ant.species.richness: num  31 31 27 29 31 21 31 25 32 26 ...
+##  $ ant.abundance       : num  561 713 392 481 1036 ...
 </code></pre>
 
 <pre><code class="r">print(beetle_abund)
@@ -676,7 +672,7 @@ str(beetle_abund)
 <pre><code>## SAFE dataset:
 ## Concept: 1400561; Record 1400562; Worksheet: Ant-Psel
 ## First 10 rows:
-##        Site ant species richness ant abundance
+##        Site ant.species.richness ant.abundance
 ## 1    SAFE_E                   31           561
 ## 2    SAFE_D                   31           713
 ## 3    SAFE_F                   27           392
@@ -812,7 +808,7 @@ str(beetle_morph)
  str(all_taxa)
 </code></pre>
 
-<pre><code> ## Classes &#39;safe_taxa&#39; and &#39;data.frame&#39;:   5811 obs. of  13 variables:
+<pre><code> ## Classes &#39;safe_taxa&#39; and &#39;data.frame&#39;:   5819 obs. of  13 variables:
  ##  $ kingdom    : chr  &quot;Plantae&quot; &quot;Plantae&quot; &quot;Animalia&quot; &quot;Plantae&quot; ...
  ##  $ phylum     : chr  &quot;Tracheophyta&quot; &quot;Tracheophyta&quot; &quot;Chordata&quot; &quot;Tracheophyta&quot; ...
  ##  $ class      : chr  &quot;Magnoliopsida&quot; &quot;Magnoliopsida&quot; &quot;Aves&quot; &quot;Magnoliopsida&quot; ...
@@ -852,7 +848,7 @@ plot(beetle_phylo, show.node.label=TRUE, font=1, no.margin=TRUE)
 print(gazetteer)
 </code></pre>
 
-<pre><code>## Simple feature collection with 5061 features and 15 fields
+<pre><code>## Simple feature collection with 5171 features and 15 fields
 ## geometry type:  GEOMETRY
 ## dimension:      XY
 ## bbox:           xmin: 116.9471 ymin: 4.41215 xmax: 117.9959 ymax: 4.961828
@@ -1016,7 +1012,7 @@ insert_dataset(1237719, files)
 
 <pre><code>## SAFE dataset
 ## Concept: 1198840; Record 1237719; Worksheet: Data
-## &#39;data.frame&#39;:    34 obs. of  10 variables:
+## &#39;data.frame&#39;:    34 obs. of  11 variables:
 ##  $ taxon_name              : chr  &quot;Anguilla.borneensis&quot; &quot;Anguilla.marmorata&quot; &quot;Barbodes.sealei&quot; &quot;Barbonymus.balleroides&quot; ...
 ##  $ Body_size               : num  24.14 30.56 8.51 11.36 7.59 ...
 ##  $ body_shape              : Factor w/ 3 levels &quot;Compressed&quot;,&quot;Cylindrical&quot;,..: 2 2 1 1 1 2 1 2 1 2 ...
@@ -1026,7 +1022,8 @@ insert_dataset(1237719, files)
 ##  $ gregariousness          : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 2 2 1 1 1 2 2 2 ...
 ##  $ presence_barbels        : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 1 2 2 2 1 2 ...
 ##  $ vertical_position_water : Factor w/ 4 levels &quot;Benthic&quot;,&quot;Benthopelagic&quot;,..: 2 2 3 3 2 2 2 2 3 1 ...
-##  $ air-breathing_capability: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 1 1 2 2 1 1 1 1 ...
+##  $ air.breathing_capability: chr  &quot;yes&quot; &quot;yes&quot; &quot;no&quot; &quot;no&quot; ...
+##  $ air-breathing_capability: Factor w/ 0 levels: NA NA NA NA NA NA NA NA NA NA ...
 </code></pre>
 
 <h1>File details and accessing files</h1>
