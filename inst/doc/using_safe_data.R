@@ -66,6 +66,20 @@ within_a <- search_spatial(location='BL_A')
 # Datasets that sampled within 2 km of the Maliau Basin Field Study Centre
 near_maliau <- search_spatial(wkt='POINT(116.97394 4.73481)', distance=2000)
 
+## ----combining_searches, collapse=TRUE----------------------------------------
+# Three searches
+fish <- search_taxa('Actinopterygii')
+odonates <- search_taxa("Odonata")
+ewers <- search_authors("Ewers")
+# Logical combinations
+aquatic <- fish | odonates
+aquatic_ewers <- aquatic & ewers
+all_in_one <- (fish | odonates) & ewers
+
+## ----restricting_searches, collapse=TRUE--------------------------------------
+fish <- search_taxa('Actinopterygii')
+ewers <- search_authors("Ewers", ids=fish)
+
 ## ----validate_recs, echo=TRUE-------------------------------------------------
 recs <- validate_record_ids(c('https://doi.org/10.5281/zenodo.3247631',
                               '10.5281/zenodo.3266827',
@@ -95,6 +109,21 @@ show_worksheet(recs[3,], 'Data', extended_fields=TRUE)
 #  ## 2: No
 #  ##
 #  ## Selection:
+
+## ----download_safe_external, eval=FALSE---------------------------------------
+#  download_safe_files(3697804, xlsx_only=FALSE)
+#  # 2 files requested from 1 records
+#  #  - 1 local (11.3 Kb)
+#  #  - 0 embargoed or restricted (0 bytes)
+#  #  - 1 to download (74.1 Kb)
+#  #
+#  # 1: Yes
+#  # 2: No
+#  #
+#  # Selection: 1
+#  # 2 files for record 3697804: 1 to download
+#  #  - Downloaded: Sampling_area_borders.xlsx,
+#  # - Downloaded: Sampling_area_borders_UTM50N_WGS84.zip
 
 ## ----load_safe_data-----------------------------------------------------------
 beetle_abund <- load_safe_data(1400562, 'Ant-Psel')
