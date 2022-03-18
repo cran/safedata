@@ -21,6 +21,23 @@ if (length(lines)==1) {        # first n lines
 	x <- paste(c(x, ""), collapse = "\n")
 	hook_output(x, options)
 })
+# Comments as #> not ##
+knitr::opts_chunk$set(
+  comment = '#>'
+)
+
+## ----load_remote_data, echo=FALSE---------------------------------------------
+# All the remote data used in building this vignette is downloaded
+# and cached in R/sysdata.rda, so that vignette code checking and 
+# building does not rely on remote resources. The vignette_objects.R
+# script _does_ need to be run before fresh releases to update the file.
+
+use_remote <- as.logical(Sys.getenv('BUILD_VIGNETTE_USING_REMOTE', FALSE))
+if (! use_remote){
+  soil_datasets <- safedata:::vignette_soil_search
+  ants <- safedata:::vignette_ants_search
+  all_taxa <- safedata:::vignette_taxon_coverage
+}
 
 ## ----install_cran, eval=FALSE-------------------------------------------------
 #  install.packages("safedata")
@@ -50,25 +67,30 @@ library(safedata)
 ## ----load_example_dir---------------------------------------------------------
 set_example_safe_dir()
 
-## ----search_text, echo=TRUE---------------------------------------------------
+## ----search_text, eval=use_remote---------------------------------------------
 soil_datasets <- search_text('soil')
+
+## ----search_text_out, collapse=TRUE-------------------------------------------
 print(soil_datasets)
 
-## ----search_taxa, collapse=TRUE-----------------------------------------------
-print(ants <- search_taxa('Formicidae'))
+## ----search_taxa, eval=use_remote---------------------------------------------
+ants <- search_taxa('Formicidae')
 
-## ----search_taxa_id, collapse=TRUE--------------------------------------------
+## ----search_taxa_out, collapse=TRUE-------------------------------------------
+print(ants)
+
+## ----search_taxa_id, eval=use_remote------------------------------------------
 ants <- search_taxa(gbif_id=4342)
 
-## ----search_spatial, collapse=TRUE--------------------------------------------
+## ----search_spatial, eval=use_remote------------------------------------------
 # Datasets that include sampling within experimental block A
 within_a <- search_spatial(location='BL_A')
 # Datasets that sampled within 2 km of the Maliau Basin Field Study Centre
 near_maliau <- search_spatial(wkt='POINT(116.97394 4.73481)', distance=2000)
 
-## ----combining_searches, collapse=TRUE----------------------------------------
+## ----combining_searches, collapse=TRUE, eval=use_remote-----------------------
 # Three searches
-fish <- search_taxa('Actinopterygii')
+fish <- search_taxa("Actinopterygii")
 odonates <- search_taxa("Odonata")
 ewers <- search_authors("Ewers")
 # Logical combinations
@@ -76,8 +98,8 @@ aquatic <- fish | odonates
 aquatic_ewers <- aquatic & ewers
 all_in_one <- (fish | odonates) & ewers
 
-## ----restricting_searches, collapse=TRUE--------------------------------------
-fish <- search_taxa('Actinopterygii')
+## ----restricting_searches, collapse=TRUE, eval=use_remote---------------------
+fish <- search_taxa("Actinopterygii")
 ewers <- search_authors("Ewers", ids=fish)
 
 ## ----validate_recs, echo=TRUE-------------------------------------------------
@@ -90,13 +112,13 @@ print(recs)
 show_concepts(recs)
 
 ## ----show_record--------------------------------------------------------------
-show_record(recs[3,])
+show_record(1400562)
 
 ## ----show_worksheet-----------------------------------------------------------
-show_worksheet(recs[3,], 'Data')
+show_worksheet(1400562, 'EnvironVariables')
 
 ## ----show_worksheet_long, output.lines=15-------------------------------------
-show_worksheet(recs[3,], 'Data', extended_fields=TRUE)
+show_worksheet(1400562, 'EnvironVariables', extended_fields=TRUE)
 
 ## ----download_safe, eval=FALSE------------------------------------------------
 #  download_safe_files(within_a)
@@ -144,8 +166,10 @@ beetle_morph <- load_safe_data(1400562, 'MorphFunctTraits')
 beetle_morph <- add_taxa(beetle_morph)
 str(beetle_morph)
 
-## ----get_taxon_coverage-------------------------------------------------------
+## ----get_taxon_coverage, eval=use_remote--------------------------------------
 all_taxa <- get_taxon_coverage()
+
+## ----get_taxon_coverage_out---------------------------------------------------
 str(all_taxa)
 
 ## ----get_phylo----------------------------------------------------------------

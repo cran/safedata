@@ -1,8 +1,8 @@
 Package: safedata
 Type: Package
 Title: Interface to Data from the SAFE Project
-Version: 1.0.9
-Date: 2020-11-18
+Version: 1.1.0
+Date: 2022-03-17
 Authors@R: c(
     person('Andy', 'Aldersley', email='a.aldersley@imperial.ac.uk', role=c('aut')),
     person('David', 'Orme', email='d.orme@imperial.ac.uk', role=c('aut','cre'),
@@ -14,17 +14,17 @@ Description: The SAFE Project (<https://www.safeproject.net/>) is a large
 	through the Zenodo data repository and this package makes it easy to 
 	discover and load that data into R.
 License: GPL-3
-Imports: readxl, jsonlite, chron, curl, sf, igraph
-Suggests: knitr, rmarkdown, ape
+Imports: readxl, jsonlite, chron, curl, sf, httr, igraph
+Suggests: knitr, rmarkdown, ape, testthat (>= 2.1.0)
 Encoding: UTF-8
 URL: https://imperialcollegelondon.github.io/safedata/index.html
 BugReports: https://github.com/ImperialCollegeLondon/safedata/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-11-18 18:16:22 UTC; dorme
+Packaged: 2022-03-17 21:34:34 UTC; dorme
 Author: Andy Aldersley [aut],
   David Orme [aut, cre] (<https://orcid.org/0000-0002-7005-1394>)
 Maintainer: David Orme <d.orme@imperial.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-11-18 22:10:03 UTC
+Date/Publication: 2022-03-18 15:10:02 UTC
