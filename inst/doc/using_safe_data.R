@@ -68,39 +68,39 @@ library(safedata)
 set_example_safe_dir()
 
 ## ----search_text, eval=use_remote---------------------------------------------
-soil_datasets <- search_text('soil')
+#  soil_datasets <- search_text('soil')
 
 ## ----search_text_out, collapse=TRUE-------------------------------------------
 print(soil_datasets)
 
 ## ----search_taxa, eval=use_remote---------------------------------------------
-ants <- search_taxa('Formicidae')
+#  ants <- search_taxa('Formicidae')
 
 ## ----search_taxa_out, collapse=TRUE-------------------------------------------
 print(ants)
 
 ## ----search_taxa_id, eval=use_remote------------------------------------------
-ants <- search_taxa(gbif_id=4342)
+#  ants <- search_taxa(gbif_id=4342)
 
 ## ----search_spatial, eval=use_remote------------------------------------------
-# Datasets that include sampling within experimental block A
-within_a <- search_spatial(location='BL_A')
-# Datasets that sampled within 2 km of the Maliau Basin Field Study Centre
-near_maliau <- search_spatial(wkt='POINT(116.97394 4.73481)', distance=2000)
+#  # Datasets that include sampling within experimental block A
+#  within_a <- search_spatial(location='BL_A')
+#  # Datasets that sampled within 2 km of the Maliau Basin Field Study Centre
+#  near_maliau <- search_spatial(wkt='POINT(116.97394 4.73481)', distance=2000)
 
 ## ----combining_searches, collapse=TRUE, eval=use_remote-----------------------
-# Three searches
-fish <- search_taxa("Actinopterygii")
-odonates <- search_taxa("Odonata")
-ewers <- search_authors("Ewers")
-# Logical combinations
-aquatic <- fish | odonates
-aquatic_ewers <- aquatic & ewers
-all_in_one <- (fish | odonates) & ewers
+#  # Three searches
+#  fish <- search_taxa("Actinopterygii")
+#  odonates <- search_taxa("Odonata")
+#  ewers <- search_authors("Ewers")
+#  # Logical combinations
+#  aquatic <- fish | odonates
+#  aquatic_ewers <- aquatic & ewers
+#  all_in_one <- (fish | odonates) & ewers
 
 ## ----restricting_searches, collapse=TRUE, eval=use_remote---------------------
-fish <- search_taxa("Actinopterygii")
-ewers <- search_authors("Ewers", ids=fish)
+#  fish <- search_taxa("Actinopterygii")
+#  ewers <- search_authors("Ewers", ids=fish)
 
 ## ----validate_recs, echo=TRUE-------------------------------------------------
 recs <- validate_record_ids(c('https://doi.org/10.5281/zenodo.3247631',
@@ -167,7 +167,7 @@ beetle_morph <- add_taxa(beetle_morph)
 str(beetle_morph)
 
 ## ----get_taxon_coverage, eval=use_remote--------------------------------------
-all_taxa <- get_taxon_coverage()
+#  all_taxa <- get_taxon_coverage()
 
 ## ----get_taxon_coverage_out---------------------------------------------------
 str(all_taxa)
