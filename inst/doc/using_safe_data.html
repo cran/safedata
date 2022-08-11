@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andy Aldersley and David Orme" />
 
-<meta name="date" content="2022-04-25" />
+<meta name="date" content="2022-08-01" />
 
 <title>Using the safedata package</title>
 
@@ -333,7 +333,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Using the <code>safedata</code> package</h1>
 <h4 class="author">Andy Aldersley and David Orme</h4>
-<h4 class="date">2022-04-25</h4>
+<h4 class="date">2022-08-01</h4>
 
 
 
@@ -412,9 +412,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>soil_datasets <span class="ot">&lt;-</span> <span class="fu">search_text</span>(<span class="st">&#39;soil&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(soil_datasets)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Set includes 22 concept ids and 28 record ids: </span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 20 open and most recent (*)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 21 open and most recent (*)</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 6 open and outdated (o)</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 2 under embargo or restricted (x)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 1 under embargo or restricted (x)</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    concept  record available</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  1198564 3857210         *</span></span>
@@ -440,7 +440,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 3979295 3979296         *</span></span>
 <span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 4297672 4297673         x</span></span>
 <span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 4630979 4630980         *</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 4899609 4899610         x</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 4899609 4899610         *</span></span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25 5113428 5113429         *</span></span>
 <span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26 5113430 5113431         *</span></span>
 <span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27 5519571 5519572         *</span></span>
@@ -879,7 +879,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li><p><code>get_locations()</code>: This function returns an <code>sf</code> object containing the locations used within a dataset. For known locations, the GIS data for the location are taken directly from the gazetteer. If the locations are new sampling sites, then GIS data provided in the dataset is used. Note that it is possible for dataset providers to create a new locations without including GIS data - these will be represented using empty GIS geometries.</p>
 <p>By default, the returned <code>sf</code> object will only include the location name used in the dataset, the gazetteer name for known sampling sites and an indication of whether the location is new or known, but <code>gazetteer_info=TRUE</code> can be used to include the gazetteer attributes for known locations.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
-<pre><code>#&gt; Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 9.0.0; sf_use_s2() is TRUE</code></pre>
+<pre><code>#&gt; Linking to GEOS 3.10.2, GDAL 3.5.0, PROJ 9.0.0; sf_use_s2() is TRUE</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>beetle_locs <span class="ot">&lt;-</span> <span class="fu">get_locations</span>(<span class="dv">1400562</span>)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(beetle_locs)</span></code></pre></div>
 <pre><code>#&gt; Simple feature collection with 20 features and 3 fields
@@ -952,7 +952,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">insert_dataset</span>(<span class="dv">1237719</span>, files)</span></code></pre></div>
 <pre><code>#&gt; Inserting files: template_ClareWfunctiondata.xlsx</code></pre>
 <pre><code>#&gt; Warning in dir.create(dirname(local_files$current_safe_dir_path[1]), recursive
-#&gt; = TRUE): &#39;/var/folders/62/cz0ctby96lq7ggnytfbtd__40000gn/T//RtmpZxebNA/
+#&gt; = TRUE): &#39;/var/folders/62/cz0ctby96lq7ggnytfbtd__40000gn/T//RtmpysllCq/
 #&gt; safedata_example_dir/1198840/1237719&#39; already exists</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">load_safe_data</span>(<span class="dv">1237719</span>, <span class="st">&#39;Data&#39;</span>)</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)</span></code></pre></div>
